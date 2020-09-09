@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './App.css';
+import './App.scss';
 import dotenv from 'dotenv';
 import moment from 'moment';
 const axios = require('axios');
@@ -55,15 +55,18 @@ function App() {
 		}, 1000);
 	};
 	const getWeather = async () => {
-		console.log(process.env.REACT_APP_OPEN_WEATHER);
-		const todayWeather = await axios.get(
+		await weather.getAllWeather(function (err, temp) {
+			console.log(temp);
+			setCurrentWeather(temp);
+		});
+		/* const todayWeather = await axios.get(
 			`https://cors-anywhere.herokuapp.com/api.openweathermap.org/data/2.5/weather?q=Lisbon&appid=${process.env.REACT_APP_OPEN_WEATHER}`
 		);
 		setCurrentWeather(todayWeather.data);
 		console.log(todayWeather.data);
 		setInterval(() => {
 			console.log('weather');
-		}, 1000000);
+		}, 1000000); */
 	};
 	return (
 		<div className="overall">
@@ -94,7 +97,48 @@ function App() {
 						Hour: {hour}...Minutes: {minutes}
 					</p>
 				</div>
-				<div className="box background">weather</div>
+				<div className="box background">
+					<div className="overall_weather">
+						<div className="forty_percent">
+							<img
+								src="https://image.flaticon.com/icons/svg/2938/2938068.svg"
+								alt=""
+							/>
+						</div>
+						<div className="forty_percent">
+							{currentWeather && <h1>{currentWeather.main.temp}º</h1>}
+						</div>
+					</div>
+					<div className="overall_weather">
+						<div className="forty_percent">
+							<div className="forty_percent">
+								<img
+									src="https://image.flaticon.com/icons/svg/2938/2938006.svg"
+									alt=""
+								/>
+							</div>
+							<div className="forty_percent">hello</div>
+						</div>
+						<div className="forty_percent">
+							<div className="forty_percent">hello</div>
+							<div className="forty_percent">hello</div>
+						</div>
+					</div>
+
+					{/* <div className="current_weather">
+						<img
+							src="https://image.flaticon.com/icons/svg/2938/2938068.svg"
+							alt=""
+						/>
+						{currentWeather && <h1>{currentWeather.main.temp}º</h1>}
+					</div>
+					<div className="other_weather">
+						<img
+							src="https://image.flaticon.com/icons/svg/2938/2938006.svg"
+							alt=""
+						/>
+					</div> */}
+				</div>
 			</div>
 			<div className="row">Notification</div>
 			<div className="row">

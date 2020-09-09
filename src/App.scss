@@ -1,0 +1,52 @@
+body {
+	background-color: black;
+	color: lightgray;
+}
+
+.overall {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.background {
+	background-color: red;
+}
+
+.box {
+	width: 33%;
+	min-height: 33vh;
+	height: fit-content;
+}
+
+.row {
+	display: flex;
+	justify-content: space-between;
+}
+
+.current_weather,
+.other_weather {
+	display: flex;
+	justify-content: space-between;
+	& > img {
+		width: 80px;
+		filter: invert(0.8);
+	}
+}
+
+.overall_weather {
+	display: flex;
+	justify-content: space-between;
+	img {
+		width: inherit;
+		filter: invert(0.8);
+	}
+}
+
+.forty_percent {
+	display: flex;
+	justify-content: space-between;
+	width: 45%;
+	border: 1px solid white;
+}
