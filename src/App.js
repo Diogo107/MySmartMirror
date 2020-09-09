@@ -18,6 +18,8 @@ function App() {
 	const [weekday, setWeekday] = useState();
 	const [currentWeather, setCurrentWeather] = useState();
 	const [news, setNews] = useState();
+	const [newsDisplayed, setNewsDisplayed] = useState();
+	const [counter, setCounter] = useState(0);
 
 	useEffect(() => {
 		let a = moment.unix(1599631969);
@@ -64,11 +66,28 @@ function App() {
 		});
 	};
 	const getNews = async () => {
-		console.log('this is the news', process.env.REACT_APP_NEWS_API);
 		const getNews = await axios.get(
 			`http://newsapi.org/v2/top-headlines?country=pt&apiKey=${process.env.REACT_APP_NEWS_API}`
 		);
-		setNews(getNews);
+		console.log('this is the news', getNews.data.articles);
+		await setNews(getNews.data.articles);
+		setInterval(() => {
+			//let temp = news[counter].content;
+			//console.log(temp);
+			setCounter(1);
+			console.log(news);
+			console.log('got this');
+		}, 3000);
+		//currentNews(news);
+	};
+	const currentNews = (news) => {
+		setNewsDisplayed('hello');
+		setInterval(() => {
+			//let temp = news[counter].content;
+			//console.log(temp);
+			setCounter(1);
+			console.log('got this');
+		}, 3000);
 	};
 	return (
 		<div className="overall">
@@ -76,10 +95,7 @@ function App() {
 				<div className="box">
 					<button
 						onClick={async () => {
-							console.log(weather);
-							const a = await weather.getTemperature(function (err, temp) {
-								console.log(temp);
-							});
+							console.log(news);
 						}}
 					>
 						Tempo
@@ -176,16 +192,9 @@ function App() {
 				<div className="box background">Stocks</div>
 				<div className="box background">last emails</div>
 				<div className="box background">
-					<h1>This is the title</h1>
-					<p>
-						lorem ipsumEnim adipisicing minim deserunt adipisicing aliqua
-						consequat ea proident fugiat aliqua ex. Lorem tempor minim veniam
-						anim velit esse. Magna eu proident ad sint sint. Esse ex consectetur
-						ad cupidatat veniam qui sunt ut. Elit cupidatat tempor aliqua ut eu.
-						Incididunt aliqua ex sunt anim tempor minim magna eiusmod excepteur.
-						Incididunt tempor anim ea ipsum consectetur do consequat ut enim
-						deserunt esse do velit voluptate. Do exercitation sit anim id. Enim
-					</p>
+					{news && news.filter((e) => console.log('e'))}
+					<h1>{newsDisplayed && news[counter].author}</h1>
+					<p>{newsDisplayed && news[counter].content}</p>
 				</div>
 			</div>
 		</div>
