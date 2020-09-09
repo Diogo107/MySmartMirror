@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import './App.scss';
-import dotenv from 'dotenv';
 import moment from 'moment';
 const axios = require('axios');
 //Open Weather
@@ -18,10 +17,14 @@ function App() {
 	const [year, setYear] = useState();
 	const [weekday, setWeekday] = useState();
 	const [currentWeather, setCurrentWeather] = useState();
+	const [news, setNews] = useState();
 
 	useEffect(() => {
+		let a = moment.unix(1599631969);
+		console.log('helloooooo', a.hour(), a.minutes());
 		time();
 		getWeather();
+		getNews();
 		console.log('useEffect');
 		console.log(moment().format('HH, mm'));
 	}, []);
@@ -59,14 +62,13 @@ function App() {
 			console.log(temp);
 			setCurrentWeather(temp);
 		});
-		/* const todayWeather = await axios.get(
-			`https://cors-anywhere.herokuapp.com/api.openweathermap.org/data/2.5/weather?q=Lisbon&appid=${process.env.REACT_APP_OPEN_WEATHER}`
+	};
+	const getNews = async () => {
+		console.log('this is the news', process.env.REACT_APP_NEWS_API);
+		const getNews = await axios.get(
+			`http://newsapi.org/v2/top-headlines?country=pt&apiKey=${process.env.REACT_APP_NEWS_API}`
 		);
-		setCurrentWeather(todayWeather.data);
-		console.log(todayWeather.data);
-		setInterval(() => {
-			console.log('weather');
-		}, 1000000); */
+		setNews(getNews);
 	};
 	return (
 		<div className="overall">
@@ -97,7 +99,7 @@ function App() {
 						Hour: {hour}...Minutes: {minutes}
 					</p>
 				</div>
-				<div className="box background">
+				<div className="box">
 					<div className="overall_weather">
 						<div className="forty_percent">
 							<img
@@ -117,34 +119,74 @@ function App() {
 									alt=""
 								/>
 							</div>
-							<div className="forty_percent">hello</div>
+							<div className="forty_percent">
+								{currentWeather && <h3>{currentWeather.wind.speed} km/h</h3>}
+							</div>
 						</div>
 						<div className="forty_percent">
-							<div className="forty_percent">hello</div>
-							<div className="forty_percent">hello</div>
+							<div className="forty_percent">
+								<img
+									src="https://image.flaticon.com/icons/svg/2316/2316581.svg"
+									alt=""
+								/>
+							</div>
+							<div className="forty_percent">
+								{currentWeather && (
+									<h3>{currentWeather.main.feels_like} km/h</h3>
+								)}
+							</div>
 						</div>
 					</div>
-
-					{/* <div className="current_weather">
-						<img
-							src="https://image.flaticon.com/icons/svg/2938/2938068.svg"
-							alt=""
-						/>
-						{currentWeather && <h1>{currentWeather.main.temp}º</h1>}
+					<div className="overall_weather">
+						<div className="forty_percent">
+							<div className="forty_percent">
+								<img
+									src="https://image.flaticon.com/icons/svg/2294/2294975.svg"
+									alt=""
+								/>
+							</div>
+							<div className="forty_percent">
+								{currentWeather && (
+									<h3>
+										{moment.unix(currentWeather.sys.sunrise).format('HH : mm')}
+									</h3>
+								)}
+							</div>
+						</div>
+						<div className="forty_percent">
+							<div className="forty_percent">
+								<img
+									src="https://image.flaticon.com/icons/svg/2294/2294979.svg"
+									alt=""
+								/>
+							</div>
+							<div className="forty_percent">
+								{currentWeather && (
+									<h3>
+										{moment.unix(currentWeather.sys.sunset).format('HH : mm')}
+									</h3>
+								)}
+							</div>
+						</div>
 					</div>
-					<div className="other_weather">
-						<img
-							src="https://image.flaticon.com/icons/svg/2938/2938006.svg"
-							alt=""
-						/>
-					</div> */}
 				</div>
 			</div>
 			<div className="row">Notification</div>
 			<div className="row">
 				<div className="box background">Stocks</div>
 				<div className="box background">last emails</div>
-				<div className="box background">News</div>
+				<div className="box background">
+					<h1>This is the title</h1>
+					<p>
+						lorem ipsumEnim adipisicing minim deserunt adipisicing aliqua
+						consequat ea proident fugiat aliqua ex. Lorem tempor minim veniam
+						anim velit esse. Magna eu proident ad sint sint. Esse ex consectetur
+						ad cupidatat veniam qui sunt ut. Elit cupidatat tempor aliqua ut eu.
+						Incididunt aliqua ex sunt anim tempor minim magna eiusmod excepteur.
+						Incididunt tempor anim ea ipsum consectetur do consequat ut enim
+						deserunt esse do velit voluptate. Do exercitation sit anim id. Enim
+					</p>
+				</div>
 			</div>
 		</div>
 	);
