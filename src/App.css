@@ -1,0 +1,22 @@
+body {
+	background-color: gray;
+	color: lightgray;
+}
+
+.overall {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.box {
+	background-color: red;
+	width: 33%;
+	height: fit-content;
+}
+
+.row {
+	display: flex;
+	justify-content: space-between;
+}
