@@ -3,6 +3,12 @@ import './App.css';
 import dotenv from 'dotenv';
 import moment from 'moment';
 const axios = require('axios');
+//Open Weather
+var weather = require('openweather-apis');
+weather.setLang('pt');
+weather.setCityId(2267112);
+weather.setUnits('metric');
+weather.setAPPID(process.env.REACT_APP_OPEN_WEATHER);
 
 function App() {
 	const [hour, setHour] = useState();
@@ -15,7 +21,7 @@ function App() {
 
 	useEffect(() => {
 		time();
-		weather();
+		getWeather();
 		console.log('useEffect');
 		console.log(moment().format('HH, mm'));
 	}, []);
@@ -48,7 +54,7 @@ function App() {
 			}
 		}, 1000);
 	};
-	const weather = async () => {
+	const getWeather = async () => {
 		console.log(process.env.REACT_APP_OPEN_WEATHER);
 		const todayWeather = await axios.get(
 			`https://cors-anywhere.herokuapp.com/api.openweathermap.org/data/2.5/weather?q=Lisbon&appid=${process.env.REACT_APP_OPEN_WEATHER}`
@@ -63,6 +69,16 @@ function App() {
 		<div className="overall">
 			<div className="row">
 				<div className="box">
+					<button
+						onClick={async () => {
+							console.log(weather);
+							const a = await weather.getTemperature(function (err, temp) {
+								console.log(temp);
+							});
+						}}
+					>
+						Tempo
+					</button>
 					<h2>{weekday}</h2>
 					{/* <img
 						src="https://image.flaticon.com/icons/svg/747/747824.svg"

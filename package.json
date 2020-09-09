@@ -10,12 +10,14 @@
     "bootstrap": "^4.5.2",
     "dotenv": "^8.2.0",
     "moment": "^2.27.0",
+    "openweather-apis": "^4.3.1",
     "react": "^16.13.1",
     "react-bootstrap": "^1.3.0",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.3",
     "reactstrap": "^8.5.1",
-    "themed-analog-clock": "^2.1.4"
+    "themed-analog-clock": "^2.1.4",
+    "weather": "^1.0.4"
   },
   "scripts": {
     "start": "react-scripts start",
