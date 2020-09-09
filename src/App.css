@@ -20,3 +20,8 @@ body {
 	display: flex;
 	justify-content: space-between;
 }
+
+#clock {
+	max-height: 30vh;
+	box-sizing: border-box;
+}
