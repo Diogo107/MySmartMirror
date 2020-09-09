@@ -10,7 +10,7 @@ function App() {
 				<div className="box">Clocks</div>
 				<div className="box">weather</div>
 			</div>
-			<div className="row">Notification</div>
+			<div className="row">Notifications</div>
 			<div className="row">
 				<div className="box">Stocks</div>
 				<div className="box">last emails</div>
