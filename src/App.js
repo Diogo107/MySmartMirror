@@ -7,7 +7,7 @@ function App() {
 			<div className="row">
 				<div className="box">Calendar</div>
 				{/* date */}
-				<div className="box">Clock</div>
+				<div className="box">Clocks</div>
 				<div className="box">weather</div>
 			</div>
 			<div className="row">Notifications</div>
