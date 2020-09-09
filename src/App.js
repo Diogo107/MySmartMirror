@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import ThemedAnalogClock from 'themed-analog-clock';
+import dotenv from 'dotenv';
 import moment from 'moment';
+const axios = require('axios');
 
 function App() {
 	const [hour, setHour] = useState();
@@ -10,9 +11,11 @@ function App() {
 	const [month, setMonth] = useState();
 	const [year, setYear] = useState();
 	const [weekday, setWeekday] = useState();
+	const [currentWeather, setCurrentWeather] = useState();
 
 	useEffect(() => {
 		time();
+		weather();
 		console.log('useEffect');
 		console.log(moment().format('HH, mm'));
 	}, []);
@@ -45,6 +48,17 @@ function App() {
 			}
 		}, 1000);
 	};
+	const weather = async () => {
+		console.log(process.env.REACT_APP_OPEN_WEATHER);
+		const todayWeather = await axios.get(
+			`https://cors-anywhere.herokuapp.com/api.openweathermap.org/data/2.5/weather?q=Lisbon&appid=${process.env.REACT_APP_OPEN_WEATHER}`
+		);
+		setCurrentWeather(todayWeather.data);
+		console.log(todayWeather.data);
+		setInterval(() => {
+			console.log('weather');
+		}, 1000000);
+	};
 	return (
 		<div className="overall">
 			<div className="row">
@@ -56,6 +70,7 @@ function App() {
 						style={{ width: '50px' }}
 					/> */}
 					<h4>{day + ' ' + month + ',   ' + year} </h4>
+					<h1>{hour + ' : ' + minutes}</h1>
 				</div>
 				{/* calendar */}
 				<div className="box background" id="clock">
@@ -65,7 +80,7 @@ function App() {
 				</div>
 				<div className="box background">weather</div>
 			</div>
-			<div className="row">Notification(dasdas)</div>
+			<div className="row">Notification</div>
 			<div className="row">
 				<div className="box background">Stocks</div>
 				<div className="box background">last emails</div>
