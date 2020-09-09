@@ -6,12 +6,36 @@ import moment from 'moment';
 function App() {
 	const [hour, setHour] = useState();
 	const [minutes, setMinutes] = useState();
+	const [day, setDay] = useState();
+	const [month, setMonth] = useState();
+	const [year, setYear] = useState();
+	const [weekday, setWeekday] = useState();
+
 	useEffect(() => {
 		time();
 		console.log('useEffect');
 		console.log(moment().format('HH, mm'));
 	}, []);
 	const time = () => {
+		//Current Date
+		setInterval(() => {
+			const currentWeekday = moment().format('dddd');
+			const currentDay = moment().format('d');
+			const currentMonth = moment().format('MMMM');
+			const currentYear = moment().format('YYYY');
+			if (
+				currentWeekday !== weekday ||
+				currentDay !== day ||
+				currentMonth !== month ||
+				currentYear !== year
+			) {
+				setDay(currentDay);
+				setMonth(currentMonth);
+				setYear(currentYear);
+				setWeekday(currentWeekday);
+			}
+		}, 1000);
+		//Hours and Minutes
 		setInterval(() => {
 			const currentHour = moment().format('HH');
 			const currentMinutes = moment().format('mm');
@@ -19,13 +43,18 @@ function App() {
 				setHour(currentHour);
 				setMinutes(currentMinutes);
 			}
-			console.log(hour, minutes);
 		}, 1000);
 	};
 	return (
 		<div className="overall">
 			<div className="row">
-				<div className="box">Calendar</div>
+				<div className="box">
+					<h1>{weekday}</h1>
+					<h4>
+						{day}
+						{month}, {year}
+					</h4>
+				</div>
 				{/* date */}
 				<div className="box" id="clock">
 					<p>
