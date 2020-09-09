@@ -49,25 +49,27 @@ function App() {
 		<div className="overall">
 			<div className="row">
 				<div className="box">
-					<h1>{weekday}</h1>
-					<h4>
-						{day}
-						{month}, {year}
-					</h4>
+					<h2>{weekday}</h2>
+					{/* <img
+						src="https://image.flaticon.com/icons/svg/747/747824.svg"
+						alt=""
+						style={{ width: '50px' }}
+					/> */}
+					<h4>{day + ' ' + month + ',   ' + year} </h4>
 				</div>
-				{/* date */}
-				<div className="box" id="clock">
+				{/* calendar */}
+				<div className="box background" id="clock">
 					<p>
 						Hour: {hour}...Minutes: {minutes}
 					</p>
 				</div>
-				<div className="box">weather</div>
+				<div className="box background">weather</div>
 			</div>
 			<div className="row">Notification(dasdas)</div>
 			<div className="row">
-				<div className="box">Stocks</div>
-				<div className="box">last emails</div>
-				<div className="box">News</div>
+				<div className="box background">Stocks</div>
+				<div className="box background">last emails</div>
+				<div className="box background">News</div>
 			</div>
 		</div>
 	);

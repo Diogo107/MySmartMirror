@@ -10,8 +10,11 @@ body {
 	justify-content: space-between;
 }
 
-.box {
+.background {
 	background-color: red;
+}
+
+.box {
 	width: 33%;
 	height: fit-content;
 }
