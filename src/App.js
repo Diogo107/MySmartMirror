@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import './App.scss';
 import moment from 'moment';
+//Importing Views
+import Inbox from './Views/Inbox/Index.jsx';
+import TodayDateAndHour from './Views/TodayDateAndHour/Index.jsx';
+
+//Importing Services
 const axios = require('axios');
+
 //Open Weather
 var weather = require('openweather-apis');
 weather.setLang('pt');
@@ -69,19 +75,19 @@ function App() {
 		const getNews = await axios.get(
 			`http://newsapi.org/v2/top-headlines?country=pt&apiKey=${process.env.REACT_APP_NEWS_API}`
 		);
-		console.log('this is the news', getNews.data.articles);
 		await setNews(getNews.data.articles);
-		setInterval(() => {
-			//let temp = news[counter].content;
-			//console.log(temp);
-			setCounter(1);
-			console.log(news);
-			console.log('got this');
-		}, 3000);
-		//currentNews(news);
+		setInterval(async () => {
+			setCounter((previous) => {
+				console.log(previous);
+				if (previous == 19) {
+					return 0;
+				} else {
+					return previous + 1;
+				}
+			});
+		}, 1000);
 	};
 	const currentNews = (news) => {
-		setNewsDisplayed('hello');
 		setInterval(() => {
 			//let temp = news[counter].content;
 			//console.log(temp);
@@ -93,6 +99,7 @@ function App() {
 		<div className="overall">
 			<div className="row">
 				<div className="box">
+					<TodayDateAndHour />
 					<button
 						onClick={async () => {
 							console.log(news);
@@ -190,11 +197,13 @@ function App() {
 			<div className="row">Notification</div>
 			<div className="row">
 				<div className="box background">Stocks</div>
-				<div className="box background">last emails</div>
 				<div className="box background">
-					{news && news.filter((e) => console.log('e'))}
-					<h1>{newsDisplayed && news[counter].author}</h1>
-					<p>{newsDisplayed && news[counter].content}</p>
+					<Inbox />
+				</div>
+				<div className="box background">
+					{news && news.filter((e) => console.log())}
+					<h1>{news && news[counter].author}</h1>
+					<p>{news && news[counter].content}</p>
 				</div>
 			</div>
 		</div>
