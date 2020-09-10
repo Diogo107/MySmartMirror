@@ -11,8 +11,6 @@ function Index(props) {
 	const [weekday, setWeekday] = useState();
 
 	useEffect(() => {
-		let a = moment.unix(1599631969);
-		console.log('helloooooo', a.hour(), a.minutes());
 		time();
 	}, []);
 

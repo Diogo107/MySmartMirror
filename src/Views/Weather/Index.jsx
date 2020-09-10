@@ -12,18 +12,26 @@ weather.setAPPID(process.env.REACT_APP_OPEN_WEATHER);
 
 function Index(props) {
 	const [currentWeather, setCurrentWeather] = useState();
+	const [forecast, setForecast] = useState();
 
 	useEffect(() => {
-		let a = moment.unix(1599631969);
-		console.log('helloooooo', a.hour(), a.minutes());
 		getWeather();
 	}, []);
 
 	const getWeather = async () => {
 		await weather.getAllWeather(function (err, temp) {
-			console.log(temp);
 			setCurrentWeather(temp);
 		});
+
+		console.log(weather);
+
+		const result = await weather.getWeatherForecastForDays(3, function (
+			err,
+			obj
+		) {
+			console.log(obj);
+		});
+		console.log(result);
 	};
 
 	return (

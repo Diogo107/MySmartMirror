@@ -19,7 +19,6 @@ function Index(props) {
 		await setNews(getNews.data.articles);
 		setInterval(async () => {
 			setCounter((previous) => {
-				console.log(previous);
 				if (previous == 19) {
 					return 0;
 				} else {
@@ -31,7 +30,6 @@ function Index(props) {
 
 	return (
 		<>
-			{news && news.filter((e) => console.log())}
 			<h1>{news && news[counter].author}</h1>
 			<p>{news && news[counter].content}</p>
 		</>
