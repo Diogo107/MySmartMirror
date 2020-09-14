@@ -1,3 +1,4 @@
+import Axios from 'axios';
 import React, { useState, useEffect } from 'react';
 //Import Services
 var yahooStockPrices = require('yahoo-stock-prices');
@@ -10,13 +11,30 @@ function Index(props) {
 		/* yahooStockPrices.getCurrentPrice('BCP.LS', function (err, price) {
 			console.log(price);
 		}); */
-		googleStocks(['AAPL'], function (error, data) {
-			console.log(data);
-			console.log(error);
-		});
+		getStocks();
 	}, []);
 
-	return <div>This asdasdasd</div>;
+	const getStocks = async () => {
+		const result = await Axios.get('/stocks');
+		console.log('this is result', result);
+		await setStock({
+			company: result.data.company,
+			price: result.data.price,
+		});
+		console.log(stock);
+	};
+
+	return (
+		<div>
+			<button
+				onClick={() => {
+					console.log(stock);
+				}}
+			>
+				Test
+			</button>
+		</div>
+	);
 }
 
 export default Index;

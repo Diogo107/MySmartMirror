@@ -12,8 +12,9 @@ import Axios from 'axios';
 function App() {
 	useEffect(() => {}, []);
 
-	const trial = () => {
-		Axios.get('/express_backend');
+	const trial = async () => {
+		const result = await Axios.get('/stocks');
+		console.log('this is the result', result);
 	};
 
 	return (
