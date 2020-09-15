@@ -16,29 +16,24 @@ function Index(props) {
 
 	const getStocks = async () => {
 		const result = await Axios.get('/stocks');
-		console.log('this is result', result);
 		await setStock({
 			variation: result.data.value,
 			price: result.data.price,
 		});
 		const color = document.getElementById('variation').style;
-		console.log(color);
 		if (result.data.value > 0) {
 			color.color = 'green';
 		} else if (result.data.value < 0) {
 			color.color = 'red';
 		}
+		setTimeout(() => {
+			getStocks();
+			console.log('again');
+		}, 60000);
 	};
 
 	return (
 		<div>
-			<button
-				onClick={() => {
-					console.log(stock);
-				}}
-			>
-				Test
-			</button>
 			<h1>BCP</h1>
 			{stock && (
 				<>

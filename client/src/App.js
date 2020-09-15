@@ -7,6 +7,8 @@ import TodayDateAndHour from './Views/TodayDateAndHour/Index.jsx';
 import Weather from './Views/Weather/Index.jsx';
 import News from './Views/News/Index.jsx';
 import Stocks from './Views/Stocks/Index.jsx';
+import GoogleCalendar from './Views/GoogleCalendar/Index.jsx';
+//IMporting Services
 import Axios from 'axios';
 
 function App() {
@@ -19,20 +21,20 @@ function App() {
 
 	return (
 		<div className="overall">
-			<button
+			{/* <button
 				onClick={() => {
 					trial();
 				}}
 			>
 				Test
-			</button>
+			</button> */}
 			<div className="row">
 				<div className="box">
 					<TodayDateAndHour />
 				</div>
 				{/* calendar */}
 				<div className="box background" id="clock">
-					Calendar
+					<GoogleCalendar />
 				</div>
 				<div className="box">
 					<Weather />
