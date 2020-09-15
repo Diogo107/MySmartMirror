@@ -18,10 +18,16 @@ function Index(props) {
 		const result = await Axios.get('/stocks');
 		console.log('this is result', result);
 		await setStock({
-			company: result.data.company,
+			variation: result.data.value,
 			price: result.data.price,
 		});
-		console.log(stock);
+		const color = document.getElementById('variation').style;
+		console.log(color);
+		if (result.data.value > 0) {
+			color.color = 'green';
+		} else if (result.data.value < 0) {
+			color.color = 'red';
+		}
 	};
 
 	return (
@@ -33,6 +39,13 @@ function Index(props) {
 			>
 				Test
 			</button>
+			<h1>BCP</h1>
+			{stock && (
+				<>
+					<h4 id="variation">{stock.variation} %</h4>
+					<h5>{stock.price} €</h5>
+				</>
+			)}
 		</div>
 	);
 }

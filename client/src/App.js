@@ -40,7 +40,7 @@ function App() {
 			</div>
 			<div className="row">Notification</div>
 			<div className="row">
-				<div className="box background">
+				<div className="box">
 					<Stocks />
 				</div>
 				<div className="box background">
