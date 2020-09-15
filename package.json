@@ -18,7 +18,9 @@
   "homepage": "https://github.com/Diogo107/MySmartMirror#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "gfinance": "0.0.5",
     "google-stocks": "^2.0.1",
+    "google-stocks-watch": "^1.0.0",
     "stockscraper": "0.0.0",
     "yahoo-stock-prices": "^1.0.1"
   }
