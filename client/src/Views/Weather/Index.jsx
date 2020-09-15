@@ -65,7 +65,7 @@ function Index(props) {
 						/>
 					</div>
 					<div className="forty_percent">
-						{currentWeather && <h3>{currentWeather.main.feels_like} km/h</h3>}
+						{currentWeather && <h3>{currentWeather.main.feels_like}º</h3>}
 					</div>
 				</div>
 			</div>

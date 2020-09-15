@@ -18,7 +18,7 @@ function Index(props) {
 		//Current Date
 		setInterval(() => {
 			const currentWeekday = moment().format('dddd');
-			const currentDay = moment().format('d');
+			const currentDay = moment().format('D');
 			const currentMonth = moment().format('MMMM');
 			const currentYear = moment().format('YYYY');
 			if (

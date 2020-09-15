@@ -4,8 +4,9 @@ import axios from 'axios';
 function Index(props) {
 	const gapi = window.gapi;
 	console.log('gapi', gapi);
-	var CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
-	var API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
+	var CLIENT_ID =
+		'268387324012-pmjfmh0n299nvbmsa22bpche5gp2j6gk.apps.googleusercontent.com';
+	var API_KEY = 'AIzaSyCUE47bd8FSk3ToHPe-aeBHlno_BOaEk5Y';
 	var DISCOVERY_DOCS = [
 		'https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest',
 	];
@@ -26,11 +27,16 @@ function Index(props) {
 			gapi.auth2
 				.getAuthInstance()
 				.signIn()
-				.then(() => {
-					const result = axios.get(
-						'https://www.googleapis.com/calendar/v3/calendars/diogo.filipe.santos107@gmail.com/events'
-					);
-					console.log(result);
+				.then(async (e) => {
+					const hello = await gapi.client.calendar.events.list({
+						calendarId: 'diogo.filipe.santos107@gmail.com',
+						timeMin: new Date().toISOString(),
+						showDeleted: false,
+						singleEvents: true,
+						maxResults: 10,
+						orderBy: 'startTime',
+					});
+					console.log(hello);
 				});
 		});
 	};
