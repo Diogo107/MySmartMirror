@@ -16,6 +16,7 @@ function Index(props) {
 
 	const getStocks = async () => {
 		const result = await Axios.get('/stocks');
+		console.log(result);
 		await setStock({
 			variation: result.data.value,
 			price: result.data.price,

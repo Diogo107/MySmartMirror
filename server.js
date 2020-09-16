@@ -28,12 +28,16 @@ app.get('/stocks', async (req, res) => {
 		'1d',
 		function (err, prices) {
 			console.log(prices);
-			const variation =
-				(prices[0].adjclose - prices[1].adjclose) / prices[1].adjclose;
-			const value = Math.round(variation * 10000) / 100;
-			const price = Math.round(prices[0].adjclose * 1000) / 1000;
-			res.send({ value, price });
-			console.log(Math.round(variation * 10000) / 100);
+			if (prices.lenght > 1) {
+				const variation =
+					(prices[0].adjclose - prices[1].adjclose) / prices[1].adjclose;
+				const value = Math.round(variation * 10000) / 100;
+				const price = Math.round(prices[0].adjclose * 1000) / 1000;
+				console.log('Got here');
+				res.send({ value, price });
+			} else {
+				res.send({});
+			}
 		}
 	);
 });
