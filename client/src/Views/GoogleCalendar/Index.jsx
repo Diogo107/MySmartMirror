@@ -7,15 +7,15 @@ import axios from 'axios';
 function Index(props) {
 	const [events, setEvents] = useState();
 	const gapi = window.gapi;
-	var CLIENT_ID =
-		'268387324012-pmjfmh0n299nvbmsa22bpche5gp2j6gk.apps.googleusercontent.com';
-	var API_KEY = 'AIzaSyCUE47bd8FSk3ToHPe-aeBHlno_BOaEk5Y';
+	var CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
+	var API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 	var DISCOVERY_DOCS = [
 		'https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest',
 	];
 	var SCOPES = 'https://www.googleapis.com/auth/calendar.events';
 
 	useEffect(() => {
+		calendar();
 		setTimeout(() => {
 			calendar();
 		}, 10000);
@@ -34,12 +34,10 @@ function Index(props) {
 						path: `https://www.googleapis.com/calendar/v3/calendars/lneqgq8i8g8det46em5b7529u4@group.calendar.google.com/events`,
 					});
 					const result = final.result.items.filter((single) => {
-						console.log(moment(single.start.dateTime).unix() > moment().unix());
 						if (moment(single.start.dateTime).valueOf() > moment().valueOf()) {
 							return single;
 						}
 					});
-					console.log(result);
 					/* const hello = await gapi.client.calendar.events.list({
 						calendarId: 'diogo.filipe.santos107@gmail.com',
 						timeMin: new Date().toISOString(),
@@ -49,7 +47,6 @@ function Index(props) {
 						orderBy: 'startTime',
                     }); */
 					setEvents(result);
-					console.log(result);
 				});
 			gapi.client.load('calendar', 'v3', () => console.log('bam!'));
 		});
@@ -57,13 +54,13 @@ function Index(props) {
 
 	return (
 		<div>
-			<button
+			{/* 	<button
 				onClick={() => {
 					calendar();
 				}}
 			>
 				Test
-			</button>
+			</button> */}
 
 			<Table>
 				<thead>

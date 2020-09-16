@@ -16,7 +16,6 @@ function Index(props) {
 
 	const getStocks = async () => {
 		const result = await Axios.get('/stocks');
-		console.log(result);
 		await setStock({
 			variation: result.data.value,
 			price: result.data.price,
@@ -29,12 +28,34 @@ function Index(props) {
 		}
 		setTimeout(() => {
 			getStocks();
-			console.log('again');
 		}, 60000);
+	};
+
+	var CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
+	var API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
+	var DISCOVERY_DOCS = [
+		'https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest',
+	];
+	var SCOPES = 'https://www.googleapis.com/auth/calendar.events';
+
+	const gapi = window.gapi;
+
+	const google = () => {
+		console.log('button', CLIENT_ID, API_KEY);
+		gapi.load('auth2', async (e) => {
+			console.log(e);
+		});
 	};
 
 	return (
 		<div>
+			<button
+				onClick={() => {
+					google();
+				}}
+			>
+				Test
+			</button>
 			<h1>BCP</h1>
 			{stock && (
 				<>

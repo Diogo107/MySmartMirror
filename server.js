@@ -28,7 +28,7 @@ app.get('/stocks', async (req, res) => {
 		'1d',
 		function (err, prices) {
 			console.log(prices);
-			if (prices.lenght > 1) {
+			if (prices.length > 1) {
 				const variation =
 					(prices[0].adjclose - prices[1].adjclose) / prices[1].adjclose;
 				const value = Math.round(variation * 10000) / 100;

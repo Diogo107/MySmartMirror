@@ -8,6 +8,7 @@ import Weather from './Views/Weather/Index.jsx';
 import News from './Views/News/Index.jsx';
 import Stocks from './Views/Stocks/Index.jsx';
 import GoogleCalendar from './Views/GoogleCalendar/Index.jsx';
+import MemeGenerator from './Views/MemeGenerator/Index.jsx';
 //IMporting Services
 import Axios from 'axios';
 
@@ -30,17 +31,18 @@ function App() {
 			</button> */}
 			<div className="row">
 				<div className="box">
-					<TodayDateAndHour />
+					<MemeGenerator />
+					{/* <TodayDateAndHour /> */}
 				</div>
 				{/* calendar */}
-				<div className="box background" id="clock">
+				<div className="box" id="clock">
 					<GoogleCalendar />
 				</div>
 				<div className="box">
 					<Weather />
 				</div>
 			</div>
-			<div className="row">Notification</div>
+			<div className="row">Notification, Meme Generator</div>
 			<div className="row">
 				<div className="box">
 					<Stocks />
