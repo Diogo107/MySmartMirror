@@ -7,9 +7,10 @@ function Index(props) {
 	const [meme, setMeme] = useState();
 	const [interval, setInterval] = useState(10000);
 	const [fade, setFade] = useState(5);
+	const [counter, setCounter] = useState(0.15);
 
 	useEffect(() => {
-		document.getElementById('Meme').style.opcity = 1;
+		document.getElementById('Meme').style.opacity = 0;
 		getMeme();
 	}, []);
 
@@ -18,23 +19,49 @@ function Index(props) {
 		setMeme(result.data.url);
 		setTimeout(() => {
 			getMeme();
-			fadein();
+			//fadein();
 		}, interval);
 	};
 
-	const fadein = () => {
+	const fadein = async () => {
 		const transparency = document.getElementById('Meme').style;
-		if (transparency.opacity == '') {
-			transparency.opacity = 1;
-			console.log('there was nothing');
+
+		if (counter < 1) {
+			document.getElementById('Meme').style.opacity = counter;
+			add();
+			/* for (let i = 1; i < 500; i++) {
+				console.log('happens');
+				document.getElementById('Meme').style.opacity =
+					document.getElementById('Meme').style.opacity + 0.5;
+				console.log('ended', document.getElementById('Meme').style.opacity);
+			} */
 		}
-		console.log(transparency.opacity);
+	};
+	const add = async () => {
+		await setCounter(counter + 0.1);
+		fadein();
 	};
 
 	return (
-		<div id="Meme">
-			<img src={meme} alt="" />
-		</div>
+		<>
+			<button
+				onClick={() => {
+					fadein();
+				}}
+			>
+				fade
+			</button>
+			<button
+				onClick={() => {
+					console.log(document.getElementById('Meme').style.opacity);
+				}}
+			>
+				opacity
+			</button>
+			<div id="Meme">
+				<img src={meme} alt="" />
+			</div>
+		</>
 	);
 }
 
