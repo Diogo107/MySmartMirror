@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 
 //Import Services
 import moment from 'moment';
@@ -9,7 +9,6 @@ function Index(props) {
 	const [news, setNews] = useState();
 	const [counter, setCounter] = useState(0);
 	const [interval, setInterval] = useState(10000);
-	const refContainer = useRef(0);
 
 	useEffect(() => {
 		$('#News').fadeOut({ duration: 50 });
@@ -18,9 +17,7 @@ function Index(props) {
 		}, interval - 3000);
 		getNews();
 		animation();
-		setInterval((counter) => {
-			console.log('he');
-		}, 500);
+		display();
 	}, []);
 
 	const getNews = async () => {
@@ -40,20 +37,24 @@ function Index(props) {
 		}, interval);
 	};
 
+	const display = () => {
+		setTimeout(() => {
+			setCounter((previous) => {
+				if (previous < 19) {
+					return previous + 1;
+				} else {
+					return 0;
+				}
+			});
+			display();
+		}, interval);
+	};
+
 	return (
-		<>
-			<button
-				onClick={() => {
-					console.log(counter);
-				}}
-			>
-				Miss Débora Bianca Chorincas Mourato
-			</button>
-			<div id="News">
-				<h1>{news && news[counter].author}</h1>
-				<p>{news && news[counter].content}</p>
-			</div>
-		</>
+		<div id="News">
+			<h1>{news && news[counter].author}</h1>
+			<p>{news && news[counter].content}</p>
+		</div>
 	);
 }
 
