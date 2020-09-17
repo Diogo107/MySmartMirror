@@ -10,7 +10,7 @@ var moment = require('moment');
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 //This line of code was put here to deployment
-app.use(express.static(join(__dirname, './client/build')));
+//app.use(express.static(join(__dirname, '/client/build')));
 
 // create a GET route
 app.get('/api/express_backend', (req, res) => {
