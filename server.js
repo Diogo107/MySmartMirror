@@ -13,12 +13,12 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 app.use(express.static(join(__dirname, './client/build')));
 
 // create a GET route
-app.get('/express_backend', (req, res) => {
+app.get('/api/express_backend', (req, res) => {
 	console.log('Got poked!!!!!!!!!');
 	res.send({ express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT' });
 });
 
-app.get('/stocks', async (req, res) => {
+app.get('/api/stocks', async (req, res) => {
 	console.log('Inside Stocks Route');
 	const result = await yahooStockPrices.getHistoricalPrices(
 		Number(moment().format('M')) - 1,
@@ -45,18 +45,6 @@ app.get('/stocks', async (req, res) => {
 	);
 });
 
-//This line of code was put here to deployment
-app.get('*', (req, res, next) => {
-	res.sendFile(join(__dirname, './../client/build/index.html'));
-});
-
-// Catch missing routes and forward to error handler
-app.use((req, res, next) => {
-	next(createError(404));
-});
-
-// Catch all error handler
-app.use((error, req, res, next) => {
-	res.status(error.status || 500);
-	res.json({ type: 'error', error: { message: error.message } });
+app.get('*', (req, res) => {
+	res.sendFile(path.join(__dirname + '/client/build/index.html'));
 });
