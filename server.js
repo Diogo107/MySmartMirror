@@ -41,3 +41,8 @@ app.get('/stocks', async (req, res) => {
 		}
 	);
 });
+
+//This line of code was put here to deployment
+app.get('*', (req, res, next) => {
+	res.sendFile(join(__dirname, './../client/build/index.html'));
+});
