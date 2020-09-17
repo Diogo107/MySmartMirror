@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './style.scss';
 //Importing Services
 import { Table } from 'reactstrap';
 import moment from 'moment';
@@ -33,8 +34,12 @@ function Index(props) {
 					const final = await gapi.client.request({
 						path: `https://www.googleapis.com/calendar/v3/calendars/lneqgq8i8g8det46em5b7529u4@group.calendar.google.com/events`,
 					});
+					console.log(final);
 					const result = final.result.items.filter((single) => {
-						if (moment(single.start.dateTime).valueOf() > moment().valueOf()) {
+						if (
+							moment(single.end.date).valueOf() > moment().valueOf() ||
+							moment(single.end.dateTime).valueOf() > moment().valueOf()
+						) {
 							return single;
 						}
 					});
@@ -53,15 +58,7 @@ function Index(props) {
 	};
 
 	return (
-		<div>
-			{/* 	<button
-				onClick={() => {
-					calendar();
-				}}
-			>
-				Test
-			</button> */}
-
+		<div className="Calendar__Module">
 			<Table>
 				<thead>
 					<tr>
@@ -74,7 +71,12 @@ function Index(props) {
 						events.map((single) => (
 							<tr>
 								<td>{single.summary}</td>
-								<td>{single.start.dateTime}</td>
+								{(moment(single.start.dateTime).diff(Date.now(), 'days') ==
+									0 && <td>Amanhã</td>) || (
+									<td>
+										{moment(single.start.dateTime).diff(Date.now(), 'days')}
+									</td>
+								)}
 							</tr>
 						))}
 				</tbody>

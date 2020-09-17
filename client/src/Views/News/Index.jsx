@@ -24,6 +24,7 @@ function Index(props) {
 		const getNews = await axios.get(
 			`http://newsapi.org/v2/top-headlines?country=pt&apiKey=${process.env.REACT_APP_NEWS_API}`
 		);
+		console.log(getNews);
 		await setNews(getNews.data.articles);
 	};
 
@@ -53,6 +54,13 @@ function Index(props) {
 	return (
 		<div id="News">
 			<h1>{news && news[counter].author}</h1>
+			<small>
+				{news &&
+					news[counter].publishedAt &&
+					moment(news[counter].publishedAt)
+						.locale('pt')
+						.format('D / M / YYYY, h:mm')}
+			</small>
 			<p>{news && news[counter].content}</p>
 		</div>
 	);
