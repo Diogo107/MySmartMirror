@@ -15,11 +15,6 @@ import Axios from 'axios';
 function App() {
 	useEffect(() => {}, []);
 
-	const trial = async () => {
-		const result = await Axios.get('/stocks');
-		console.log('this is the result', result);
-	};
-
 	return (
 		<div className="overall">
 			{/* <button

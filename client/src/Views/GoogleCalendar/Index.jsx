@@ -32,7 +32,7 @@ function Index(props) {
 				})
 				.then(async () => {
 					const final = await gapi.client.request({
-						path: `https://www.googleapis.com/calendar/v3/calendars/lneqgq8i8g8det46em5b7529u4@group.calendar.google.com/events`,
+						path: `https://www.googleapis.com/calendar/v3/calendars/${process.env.REACT_APP_GOOGLE_CALENDAR_API_KEY}/events`,
 					});
 					console.log(final);
 					const result = final.result.items.filter((single) => {
