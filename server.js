@@ -9,6 +9,9 @@ var moment = require('moment');
 // console.log that your server is up and running
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
+//This line of code was put here to deployment
+app.use(express.static(join(__dirname, './../client/build')));
+
 // create a GET route
 app.get('/express_backend', (req, res) => {
 	console.log('Got poked!!!!!!!!!');
