@@ -1,0 +1,8 @@
+.Calendar__Module {
+	.table {
+		width: -webkit-fill-available;
+		tr > td:nth-child(2) {
+			text-align: end;
+		}
+	}
+}
