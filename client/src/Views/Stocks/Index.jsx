@@ -49,13 +49,6 @@ function Index(props) {
 
 	return (
 		<div>
-			<button
-				onClick={() => {
-					google();
-				}}
-			>
-				Test
-			</button>
 			<h1>BCP</h1>
 			{stock && (
 				<>

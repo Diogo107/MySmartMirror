@@ -22,7 +22,7 @@ function Index(props) {
 
 	const getNews = async () => {
 		const getNews = await axios.get(
-			`http://newsapi.org/v2/top-headlines?country=pt&apiKey=${process.env.REACT_APP_NEWS_API}`
+			`https://newsapi.org/v2/top-headlines?country=pt&apiKey=${process.env.REACT_APP_NEWS_API}`
 		);
 		console.log(getNews);
 		await setNews(getNews.data.articles);
