@@ -47,7 +47,5 @@ app.get('/api/stocks', async (req, res) => {
 });
 
 app.get('*', (req, res) => {
-	console.log('This is serving React');
-	console.log(__dirname + '/client/build/index.html');
 	res.sendFile(path.join(__dirname + '/client/build/index.html'));
 });
