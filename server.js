@@ -18,6 +18,10 @@ app.get('/api/express_backend', (req, res) => {
 	res.send({ express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT' });
 });
 
+app.get('*', (req, res) => {
+	res.send({ express: 'This is the Back End response' });
+});
+
 app.get('/api/stocks', async (req, res) => {
 	console.log('Inside Stocks Route');
 	const result = await yahooStockPrices.getHistoricalPrices(
