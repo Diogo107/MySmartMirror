@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const path = require('path');
 const port = process.env.PORT || 5000;
 
 //Import Services
@@ -10,7 +11,7 @@ var moment = require('moment');
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 //This line of code was put here to deployment
-//app.use(express.static(join(__dirname, '/client/build')));
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 // create a GET route
 app.get('/api/express_backend', (req, res) => {
@@ -19,7 +20,7 @@ app.get('/api/express_backend', (req, res) => {
 });
 
 app.get('*', (req, res) => {
-	res.send({ express: 'This is the Back End response' });
+	res.sendFile(path.join(__dirname + '/client/build/index.html'));
 });
 
 app.get('/api/stocks', async (req, res) => {
