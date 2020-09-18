@@ -47,5 +47,5 @@ app.get('/api/stocks', async (req, res) => {
 });
 
 app.get('*', (req, res) => {
-	res.sendFile(path.join(__dirname + '/client/build/index.html'));
+	res.sendFile(path.join(__dirname + 'client/build/index.html'));
 });
